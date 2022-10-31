@@ -5,7 +5,7 @@ A [Foundry VTT](https://foundryvtt.com) module that allows GMs to open a preview
 ## Features
 
 - Pretty preview window that displays all your players' chatboxes
-- Customizable time interval between updates to the preview window. Lower values means it gets updated more frequently but it increases internet traffic.
+- Customizable time interval between updates to the preview window. Lower values mean it gets updated more frequently but it increases internet traffic.
 
 ## Usage
 
