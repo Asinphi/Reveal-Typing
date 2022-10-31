@@ -1,16 +1,32 @@
-.window-app .window-content section.module-dog-picture-container {
-  flex: 100;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin-top: 10px;
+.typing-preview {
+		ol {
+				list-style-type: none;
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: space-between;
 
-  .module-dog-placeholder {
-    font-size: 200px;
-  }
+				li {
+						width: 49%;
+						margin-bottom: 10px;
 
-  img.module-dog-image {
-    object-fit: contain;
-    border: none;
-  }
+						span.typing-preview__user {
+								font-weight: 600;
+								letter-spacing: .1rem;
+								text-shadow: -1px -1px 0 #000,
+								1px -1px 0 #000,
+								-1px 1px 0 #000,
+								1px 1px 0 #000;
+						}
+
+						span.typing-preview__content {
+								display: block;
+								min-height: 100px;
+								border: 1px solid #000000;
+								padding: 10px;
+								background-color: #323235;
+								color: whitesmoke;
+						}
+				}
+		}
 }

@@ -1,6 +1,8 @@
 {
-  "MYMODULE.dog-browser": "Dog browser",
-  "MYMODULE.dogs": "Dogs",
-  "MYMODULE.fetch-random-dog": "Fetch random dog photo",
-  "MYMODULE.random-dog-alt": "Image of a random dog"
+  "reveal-typing.settings": {
+    "packet-debounce": {
+      "name": "Packet Debounce",
+      "hint": "The amount of time in milliseconds between updates to the preview box. Lower values will update the preview box more frequently, but will increase internet traffic."
+    }
+  }
 }

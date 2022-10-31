@@ -1,17 +1,22 @@
 {
   "$schema": "https://json.schemastore.org/foundryvtt-manifest.json",
-  "id": "foundry-module-ts",
-  "title": "Typescript Template Module",
-  "description": "A template module using Typescript. You should change name, title, and description in module.json.",
+  "id": "reveal-typing",
+  "title": "Reveal Typing",
+  "description": "Allows GMs to see what the players are typing before they send it.",
+  "authors": [
+    {
+      "name": "Asinphi",
+      "discord": "JL#8778"
+    }
+  ],
   "version": "1.0.0",
   "packs": [],
   "system": [],
   "dependencies": [],
   "scripts": [],
   "compatibility": {
-    "minimum": "9",
-    "verified": "10",
-    "maximum": "10"
+    "minimum": "10",
+    "verified": "10"
   },
   "languages": [
     {
@@ -21,5 +26,6 @@
     }
   ],
   "styles": ["style.css"],
+  "socket": true,
   "esmodules": ["scripts/module.js"]
 }

@@ -19,6 +19,7 @@ export default defineConfig({
         file: "dist/scripts/module.js",
         format: "es",
       },
+
     },
   },
   plugins: [

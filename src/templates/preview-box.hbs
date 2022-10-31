@@ -1,0 +1,8 @@
+<ol>
+    {{#each players}}
+        <li title="{{this.name}}">
+            <span title="{{this.name}}" style="color: {{this.color}}" class="typing-preview__user">{{this.name}}</span>
+            <span title="{{this.name}}" style="border: 2px solid {{this.color}}" class="typing-preview__content">{{this.message}}</span>
+        </li>
+    {{/each}}
+</ol>
