@@ -9,7 +9,8 @@ export default class PreviewBox extends Application {
         defaults.id = "typing-preview";
         defaults.title = "Typing Preview";
         defaults.width = 1000;
-        defaults.height = "auto";
+        defaults.height = 300;
+        defaults.resizable = true;
         defaults.classes = ["typing-preview"];
         return defaults;
     }
