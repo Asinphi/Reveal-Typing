@@ -35,21 +35,27 @@ function emitTypingPreview(message: string) {
     //RevealTyping.log(game.user.name, message); // Something wrong on client-side, not printing the user name
 }
 
-Hooks.once('ready', () => {
-    if (!game.user.isGM)
-        document.getElementById("chat-message")?.addEventListener("keyup", (event) => {
-            const message = (event.target as HTMLInputElement).value;
-            if (Date.now() - lastPacketSend > RevealTyping.packetDebounce) {
+const onKeyUp = (event: KeyboardEvent) => {
+    const message = (event.target as HTMLInputElement).value;
+    if (Date.now() - lastPacketSend > RevealTyping.packetDebounce) {
+        emitTypingPreview(message);
+    } else {
+        const currentLastPacketSend = lastPacketSend;
+        setTimeout(() => {
+            if (lastPacketSend === currentLastPacketSend)
                 emitTypingPreview(message);
-            } else {
-                const currentLastPacketSend = lastPacketSend;
-                setTimeout(() => {
-                    if (lastPacketSend === currentLastPacketSend)
-                        emitTypingPreview(message);
-                }, RevealTyping.packetDebounce);
-            }
+        }, RevealTyping.packetDebounce);
+    }
+}
+
+Hooks.once('ready', () => {
+    if (!game.user.isGM) {
+        // The ready hook is called after the first renderChatLog
+        document.getElementById("chat-message")?.addEventListener("keyup", onKeyUp);
+        Hooks.on("renderChatLog", (chatLog: ChatLog, html: JQuery) => { // For the popped out chatlog
+            html.find("#chat-message")[0].addEventListener("keyup", onKeyUp);
         });
-    else
+    } else
         game.socket.on("module.reveal-typing", ({userName, message}) => {
             PreviewBox.messages[userName] = message;
             // @ts-ignore
