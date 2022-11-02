@@ -25,6 +25,7 @@ export default class PreviewBox extends Application {
 }
 
 let lastPacketSend = 0;
+let lastKeyPress = 0;
 
 function emitTypingPreview(message: string) {
     game.socket?.emit("module.reveal-typing", {
@@ -37,12 +38,13 @@ function emitTypingPreview(message: string) {
 
 const onKeyUp = (event: KeyboardEvent) => {
     const message = (event.target as HTMLInputElement).value;
+    const keyPressTime = Date.now();
+    lastKeyPress = keyPressTime;
     if (Date.now() - lastPacketSend > RevealTyping.packetDebounce) {
         emitTypingPreview(message);
     } else {
-        const currentLastPacketSend = lastPacketSend;
         setTimeout(() => {
-            if (lastPacketSend === currentLastPacketSend)
+            if (lastKeyPress === keyPressTime) // This was the last key pressed
                 emitTypingPreview(message);
         }, RevealTyping.packetDebounce);
     }
