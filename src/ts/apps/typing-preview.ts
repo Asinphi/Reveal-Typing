@@ -62,6 +62,6 @@ Hooks.once('ready', () => {
             PreviewBox.messages[userName] = message;
             // @ts-ignore
             if (!globalThis.RevealTyping.previewBox.rendered) return; // globalThis.RevealTyping is different from RevealTyping
-            document.querySelector(`.typing-preview__content[title=${userName}]`).innerHTML = message;
+            RevealTyping.previewBox.element.find(`.typing-preview__content[title=${userName}]`).text(message);
         });
 });
