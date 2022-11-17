@@ -17,8 +17,8 @@ export default class PreviewBox extends Application {
 
     override getData(options: any): any {
         return {
-            players: game.users.players
-                .filter((u) => u.active)
+            players: game.users
+                .filter((u) => u.active && u.role < game.settings.get(RevealTyping.ID, "hiddenUserLevel") && u != game.user)
                 .map(u => {return {name: u.name, color: u.color, message: PreviewBox.messages[u.name]}}),
         };
     }
@@ -51,13 +51,14 @@ const onKeyUp = (event: KeyboardEvent) => {
 }
 
 Hooks.once('ready', () => {
-    if (!game.user.isGM) {
+    if (game.user.role < game.settings.get(RevealTyping.ID, "hiddenUserLevel")) {
         // The ready hook is called after the first renderChatLog
         document.getElementById("chat-message")?.addEventListener("keyup", onKeyUp);
         Hooks.on("renderChatLog", (chatLog: ChatLog, html: JQuery) => { // For the popped out chatlog
             html.find("#chat-message")[0].addEventListener("keyup", onKeyUp);
         });
-    } else
+    }
+    if (game.user.role >= game.settings.get(RevealTyping.ID, "previewerUserLevel"))
         game.socket.on("module.reveal-typing", ({userName, message}) => {
             PreviewBox.messages[userName] = message;
             // @ts-ignore

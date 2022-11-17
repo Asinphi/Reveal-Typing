@@ -60,5 +60,31 @@ Hooks.once("init", () => {
         }
     });
 
+    const debouncedReload = foundry.utils.debounce(() => window.location.reload(), 100);
+
+    game.settings.register(RevealTyping.ID, "hiddenUserLevel", {
+        name: game.i18n.localize("reveal-typing.settings.hidden-user-level.name"),
+        hint: game.i18n.localize("reveal-typing.settings.hidden-user-level.hint"),
+        scope: "world",
+        config: true,
+        type: String,
+        choices: {
+            ...Object.fromEntries(Object.entries(CONST.USER_ROLE_NAMES).slice(1)), // Remove the None role
+            "5": game.i18n.localize("reveal-typing.settings.previewer-user-level.hide-nobody") } as never,
+        default: "4", // Gamemaster
+        onChange: debouncedReload,
+    });
+
+    game.settings.register(RevealTyping.ID, "previewerUserLevel", {
+        name: game.i18n.localize("reveal-typing.settings.previewer-user-level.name"),
+        hint: game.i18n.localize("reveal-typing.settings.previewer-user-level.hint"),
+        scope: "world",
+        config: true,
+        type: String,
+        choices: CONST.USER_ROLE_NAMES as never,
+        default: "4", // Gamemaster
+        onChange: debouncedReload,
+    });
+
     RevealTyping.packetDebounce = game.settings.get(RevealTyping.ID, "packetDebounce") as number;
 });
