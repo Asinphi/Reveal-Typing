@@ -6,12 +6,13 @@
     },
     "hidden-user-level": {
       "name": "Users to Hide",
-      "hint": "The minimum user level of users to hide from the preview box. This would prevent others from seeing what they're typing. (Default: GM)"
+      "hint": "The minimum user level of users to hide from the preview box. This would prevent others from seeing what they're typing. (Default: GM)",
+      "nobody": "Hide nobody"
     },
     "previewer-user-level": {
       "name": "User level to view preview",
       "hint": "The minimum user level of users who can view the preview box and see what non-hidden users are typing. (Default: GM)",
-      "hide-nobody": "Hide nobody"
+      "nobody": "Nobody can preview"
     }
   }
 }

@@ -70,7 +70,7 @@ Hooks.once("init", () => {
         type: String,
         choices: {
             ...Object.fromEntries(Object.entries(CONST.USER_ROLE_NAMES).slice(1)), // Remove the None role
-            "5": game.i18n.localize("reveal-typing.settings.previewer-user-level.hide-nobody") } as never,
+            "5": game.i18n.localize("reveal-typing.settings.hidden-user-level.nobody") } as never,
         default: "4", // Gamemaster
         onChange: debouncedReload,
     });
@@ -81,7 +81,9 @@ Hooks.once("init", () => {
         scope: "world",
         config: true,
         type: String,
-        choices: CONST.USER_ROLE_NAMES as never,
+        choices: {
+            ...Object.fromEntries(Object.entries(CONST.USER_ROLE_NAMES).slice(1)), // Remove the None role
+            "5": game.i18n.localize("reveal-typing.settings.previewer-user-level.nobody") } as never,
         default: "4", // Gamemaster
         onChange: debouncedReload,
     });
