@@ -59,7 +59,7 @@ Hooks.once('ready', () => {
         });
         Hooks.on("createChatMessage", (chatMessage: ChatMessage, _: any, senderId: string) => {
             if (senderId === game.user.id)
-                emitTypingPreview("");
+                setTimeout(() => emitTypingPreview(""), RevealTyping.packetDebounce);
         });
     }
     if (game.user.role >= game.settings.get(RevealTyping.ID, "previewerUserLevel"))
