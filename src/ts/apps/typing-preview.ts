@@ -40,7 +40,7 @@ const onKeyUp = (event: KeyboardEvent) => {
     const message = (event.target as HTMLInputElement).value;
     const keyPressTime = Date.now();
     lastKeyPress = keyPressTime;
-    if (Date.now() - lastPacketSend > RevealTyping.packetDebounce) {
+    if (keyPressTime - lastPacketSend > RevealTyping.packetDebounce) {
         emitTypingPreview(message);
     } else {
         setTimeout(() => {
@@ -56,6 +56,10 @@ Hooks.once('ready', () => {
         document.getElementById("chat-message")?.addEventListener("keyup", onKeyUp);
         Hooks.on("renderChatLog", (chatLog: ChatLog, html: JQuery) => { // For the popped out chatlog
             html.find("#chat-message")[0].addEventListener("keyup", onKeyUp);
+        });
+        Hooks.on("createChatMessage", (chatMessage: ChatMessage, _: any, senderId: string) => {
+            if (senderId === game.user.id)
+                emitTypingPreview("");
         });
     }
     if (game.user.role >= game.settings.get(RevealTyping.ID, "previewerUserLevel"))
